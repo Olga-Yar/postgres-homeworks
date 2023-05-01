@@ -5,7 +5,9 @@ SELECT customers.company_name, CONCAT(employees.first_name, ' ', employees.last_
 FROM orders
 INNER JOIN customers USING(customer_id)
 INNER JOIN employees USING(employee_id)
-WHERE customers.city = 'London' AND employees.city = 'London'
+INNER JOIN shippers ON orders.ship_via=shippers.shipper_id
+WHERE (customers.city = 'London' AND employees.city = 'London')
+AND shippers.company_name = 'United Package'
 
 -- 2. Наименование продукта, количество товара (product_name и units_in_stock в табл products),
 -- имя поставщика и его телефон (contact_name и phone в табл suppliers) для таких продуктов,
